@@ -8,7 +8,6 @@ Height = 240
 
 
 class Ball:
-    """Intialization of Ball"""
     def __init__(self):
         self.r = randint(19,20)
         self.x = randint(self.r, Width - self.r)
@@ -22,7 +21,6 @@ class Ball:
         canvas.move(self.ball_id, self.vx, self.vy)
 
     def move(self):
-        """Move with speed (vx) on x-axis and (vy) on y axis and also check is ball cross borders or not """
         self.x += self.vx
         self.y += self.vy
         if self.x + self.r >= Width or self.x - self.r <= 0:
@@ -31,11 +29,9 @@ class Ball:
             self.vy = -self.vy
     
     def touch(self):
-        """Check does ball touched the gollkeeper(red rectangle) or not
-            PROBLEM IS HERE!!!"""
         if self.x - self.r <= gollkeeper_coords_x2 and self.x + self.r >= gollkeeper_coords_x:    
             if self.y + self.r >= 240:
-                self.change_direct()   #<------------- when ball touches the gollkeeper, this function repeats until ball will touch gollkeeper again
+                self.change_direct()  #<------ Problem is here 
             else:
                 pass 
         else:
@@ -43,7 +39,6 @@ class Ball:
                         
     
     def change_direct(self):
-        """Chenge moving or rebound"""
         self.vy =  -self.vy
 
     
@@ -56,11 +51,11 @@ class Ball:
 
 class Gollkeeper:
     def __init__(self):
-        self.x = 100
-        self.y = 240
-        self.x2 = 140
-        self.y2 = 250
-        self.vx = 12
+        self.x = 50
+        self.y = 230
+        self.x2 = 250
+        self.y2 = 240
+        self.vx = 0
         self.vy = 0
         self.gollkeeper_id = canvas.create_rectangle(self.x, self.y, 
                                                self.x2, self.y2, fill='Red')
@@ -76,7 +71,6 @@ class Gollkeeper:
             self.vx = -self.vx
     
     def get_coords(self):
-        """announce coords of gollkeeper as global"""
         global gollkeeper_coords_x, gollkeeper_coords_x2, gollkeeper_coords_y
         gollkeeper_coords_x = self.x
         gollkeeper_coords_x2 = self.x2
@@ -88,7 +82,6 @@ class Gollkeeper:
     
 
 class Field:
-    """Empty class"""
     def __init__(self):
         pass
 
